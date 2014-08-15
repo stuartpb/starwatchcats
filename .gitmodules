@@ -1,0 +1,3 @@
+[submodule "static/github-media"]
+	path = static/github-media
+	url = https://github.com/github/media.git

@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title= repoName
+  body
+    for cat in stargazes
+      - var created = new Date(cat.created_at);
+      - var top = ((Date.now() - created) / 60000) + 'px';
+      - var left = (Math.random() * 100) + '%';
+      img(src="/github-media/octocats/blacktocat-32.png",
+        alt=cat.actor.login,
+        style="position:absolute;top:" +top+';left:'+left+';')
