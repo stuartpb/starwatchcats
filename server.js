@@ -22,7 +22,7 @@ app.get('/:owner/:repo', function(req, res, next) {
       return v.type == 'WatchEvent';
     });
     res.set('content-type','text/html');
-    res.render(__dirname + 'starwatchcats.jade');
+    res.render('starwatchcats.jade');
   });
 });
 
