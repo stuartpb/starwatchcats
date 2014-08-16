@@ -9,7 +9,7 @@ function renderStargazes(req, res, next) {
   var q = queue();
   for (var i=1; i<=10; i++) {
     q.defer(request,{
-      url:'https://api.github.com/repos/' + res.local.repoName + '/events',
+      url:'https://api.github.com/repos/' + res.locals.repoName + '/events',
       headers: {
         'User-Agent': 'request'
       },
