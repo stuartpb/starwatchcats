@@ -5,13 +5,11 @@ var request = require('request');
 var app = express();
 app.use(express.static(__dirname + '/static'));
 
-app.get('/:owner/:repo', function(req, res, next) {
+function renderStargazes(req, res, next) {
   var q = queue();
-  var repoName = req.params.owner + '/' + req.params.repo;
-  res.locals.repoName = repoName;
   for (var i=1; i<=10; i++) {
     q.defer(request,{
-      url:'https://api.github.com/repos/' + repoName + '/events',
+      url:'https://api.github.com/repos/' + res.local.repoName + '/events',
       qs: {page: i},
       json: true
       });
@@ -24,7 +22,19 @@ app.get('/:owner/:repo', function(req, res, next) {
     res.set('content-type','text/html');
     res.render('starwatchcats.jade');
   });
+}
+
+app.get('/:owner/:repo', function(req, res, next) {
+  res.locals.repoName = req.params.owner + '/' + req.params.repo;
+  renderStargazes(req, res, next);
 });
+
+if (process.env.DEFAULT_REPO) {
+  app.get('/', function(req, res, next) {
+    res.locals.repoName = process.env.DEFAULT_REPO;
+    renderStargazes(req, res, next);
+  });
+}
 
 var server = require('http').createServer(app);
 
