@@ -3,6 +3,14 @@ html
   head
     meta(charset='utf-8')
     title= repoName
+    style.
+      html {
+        margin: 0 32px 0 0;
+      }
+      body {
+        margin: 0;
+        position: relative;
+      }
   body
     for cat in stargazes
       - var created = new Date(cat.created_at);
