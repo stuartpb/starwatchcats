@@ -16,9 +16,9 @@ function renderStargazes(req, res, next) {
   }
   q.awaitAll(function(err, pages) {
     if (err) return next(err);
-    res.locals.stargazes = [].concat.apply([], pages).filter(function(v) {
-      return v.type == 'WatchEvent';
-    });
+    res.locals.stargazes = [].concat.apply([],
+      pages.map(function(v){return v.body}))
+      .filter(function(v) {return v.type == 'WatchEvent'});
     res.set('content-type','text/html');
     res.render('starwatchcats.jade');
   });
