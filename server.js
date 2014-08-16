@@ -25,3 +25,8 @@ app.get('/:owner/:repo', function(req, res, next) {
     res.render(__dirname + 'starwatchcats.jade');
   });
 });
+
+var server = require('http').createServer(app);
+
+server.listen(process.env.PORT || 5000, process.env.IP);
+
