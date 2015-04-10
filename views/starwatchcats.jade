@@ -15,6 +15,7 @@ html
         position: relative;
       }
   body
+    h1= repoName
     for cat in stargazes
       - var created = new Date(cat.created_at);
       - var top = ((Date.now() - created) / 60000) + 'px';
